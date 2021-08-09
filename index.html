@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         list-style: none;
+      }
+
+      button {
+         border: none;
+         background-color: transparent;
+         outline: none;
+      }
+
+      body {
+         min-width: 1250px;
+      }
+
+      .menu {
+         background-color: rgba(128, 128, 128, 0.5);
+         width: 850px;
+         height: 30px;
+      }
+
+      .menu button {
+         width: 40px;
+         height: 20px;
+         margin: 3px 5px;
+         float: left;
+         font-size: 15px;
+      }
+
+      .tool {
+         background-color: rgba(128, 128, 128, 0.5);
+         width: 52px;
+         height: 450px;
+         float: left;
+         box-shadow: -1px -1px white,
+            1px 0 grey;
+      }
+
+      .details {
+         width: 48px;
+         height: 198px;
+         margin-left: 2px;
+      }
+
+      .details button {
+         width: 24px;
+         height: 24px;
+         box-shadow: -1px -1px rgba(255, 255, 255, 0.8),
+            1px 1px #333;
+         float: left;
+      }
+
+      .details button:nth-child(1) {
+         background: url(./images/toolbar.png) 0px 0px;
+      }
+
+      .details button:nth-child(2) {
+         background: url(./images/toolbar.png) 24px 0px;
+      }
+
+      .details button:nth-child(3) {
+         background: url(./images/toolbar.png) 0px -24px;
+      }
+
+      .details button:nth-child(4) {
+         background: url(./images/toolbar.png) 24px -24px;
+      }
+
+      .details button:nth-child(5) {
+         background: url(./images/toolbar.png) 0px -50px;
+      }
+
+      .details button:nth-child(6) {
+         background: url(./images/toolbar.png) 24px -50px;
+      }
+
+      .details button:nth-child(7) {
+         background: url(./images/toolbar.png) 0px -74px;
+      }
+
+      .details button:nth-child(8) {
+         background: url(./images/toolbar.png) 24px -74px;
+      }
+
+      .details button:nth-child(9) {
+         background: url(./images/toolbar.png) 0px -98px;
+      }
+
+      .details button:nth-child(10) {
+         background: url(./images/toolbar.png) 24px -98px;
+      }
+
+      .details button:nth-child(11) {
+         background: url(./images/toolbar.png) 0px -124px;
+      }
+
+      .details button:nth-child(12) {
+         background: url(./images/toolbar.png) 24px -124px;
+      }
+
+      .details button:nth-child(13) {
+         background: url(./images/toolbar.png) 0px -148px;
+      }
+
+      .details button:nth-child(14) {
+         background: url(./images/toolbar.png) 24px -148px;
+      }
+
+      .details button:nth-child(15) {
+         background: url(./images/toolbar.png) 0px -172px;
+      }
+
+      .details button:nth-child(16) {
+         background: url(./images/toolbar.png) 24px -172px;
+      }
+
+      .lineRuler {
+         width: 40px;
+         height: 75px;
+         margin-left: 7px;
+         box-shadow: -1px -1px #333,
+            1px 1px rgba(255, 255, 255, 0.8);
+      }
+
+      .container {
+         background-color: grey;
+         width: 798px;
+         height: 450px;
+         float: left;
+      }
+
+      #cavs {
+         background-color: white;
+         margin: 5px 5px;
+      }
+
+      .draw {
+         background-color: rgba(128, 128, 128, 0.5);
+         width: 850px;
+         height: 60px;
+         float: left;
+         box-shadow: -1px 0 white,
+            1px 1px grey;
+      }
+
+      .allColor {
+         width: 240px;
+         height: 30px;
+         margin: 15px 10px;
+      }
+
+      .curColor {
+         width: 30px;
+         height: 30px;
+         float: left;
+         background-color: rgb(240, 240, 240, 0.8);
+         box-shadow: 1px 1px white,
+            -1px -1px grey;
+      }
+
+      .under {
+         width: 12px;
+         height: 12px;
+         float: left;
+         margin-left: 12px;
+         margin-top: 12px;
+         background-color: white;
+         box-shadow: 1px 1px grey,
+            -1px -1px grey;
+      }
+
+      .under div {
+         width: 12px;
+         height: 12px;
+         float: left;
+         margin-left: -6px;
+         margin-top: -6px;
+         background-color: black;
+         box-shadow: 1px 1px grey,
+            -1px -1px grey;
+      }
+
+      .allColor ul button {
+         width: 15px;
+         height: 15px;
+         float: left;
+         box-shadow: 1px 1px white,
+            -1px -1px grey;
+      }
+
+      .allColor ul button:nth-child(1) {
+         background-color: black;
+      }
+
+      .allColor ul button:nth-child(2) {
+         background-color: grey;
+      }
+
+      .allColor ul button:nth-child(3) {
+         background-color: rgb(206, 1, 1);
+      }
+
+      .allColor ul button:nth-child(4) {
+         background-color: rgb(192, 189, 0);
+      }
+
+      .allColor ul button:nth-child(5) {
+         background-color: rgb(64, 192, 0);
+      }
+
+      .allColor ul button:nth-child(6) {
+         background-color: rgb(0, 175, 166);
+      }
+
+      .allColor ul button:nth-child(7) {
+         background-color: rgb(9, 9, 255);
+      }
+
+      .allColor ul button:nth-child(8) {
+         background-color: rgb(143, 54, 95);
+      }
+
+      .allColor ul button:nth-child(9) {
+         background-color: rgb(154, 170, 12);
+      }
+
+      .allColor ul button:nth-child(10) {
+         background-color: rgb(0, 85, 0);
+      }
+
+      .allColor ul button:nth-child(11) {
+         background-color: rgb(40, 82, 116);
+      }
+
+      .allColor ul button:nth-child(12) {
+         background-color: rgb(0, 0, 94);
+      }
+
+      .allColor ul button:nth-child(13) {
+         background-color: purple;
+      }
+
+      .allColor ul button:nth-child(14) {
+         background-color: rgb(165, 107, 0);
+      }
+
+      .allColor ul button:nth-child(15) {
+         background-color: white;
+      }
+
+      .allColor ul button:nth-child(16) {
+         background-color: rgba(128, 128, 128, 0.5);
+      }
+
+      .allColor ul button:nth-child(17) {
+         background-color: red;
+      }
+
+      .allColor ul button:nth-child(18) {
+         background-color: yellow;
+      }
+
+      .allColor ul button:nth-child(19) {
+         background-color: rgb(0, 255, 0);
+      }
+
+      .allColor ul button:nth-child(20) {
+         background-color: rgb(0, 174, 255);
+      }
+
+      .allColor ul button:nth-child(21) {
+         background-color: blue;
+      }
+
+      .allColor ul button:nth-child(22) {
+         background-color: rgb(236, 48, 205);
+      }
+
+      .allColor ul button:nth-child(23) {
+         background-color: rgb(255, 233, 111);
+      }
+
+      .allColor ul button:nth-child(24) {
+         background-color: rgb(104, 255, 104);
+      }
+
+      .allColor ul button:nth-child(25) {
+         background-color: rgb(0, 255, 221);
+      }
+
+      .allColor ul button:nth-child(26) {
+         background-color: rgb(174, 75, 255);
+      }
+
+      .allColor ul button:nth-child(27) {
+         background-color: rgb(255, 78, 78);
+      }
+
+      .allColor ul button:nth-child(28) {
+         background-color: orange;
+      }
+
+      .etc {
+         background-color: rgba(128, 128, 128, 0.5);
+         width: 850px;
+         height: 5px;
+         float: left;
+         box-shadow: 0 0 white,
+            1px 1px grey;
+      }
+
+      .foot {
+         background-color: rgba(128, 128, 128, 0.5);
+         width: 850px;
+         height: 30px;
+         float: left;
+         line-height: 30px;
+         box-shadow: 0 0 white,
+            1px 1px grey;
+      }
+   </style>
+</head>
+
+<body>
+   <ul class="menu">
+      <button>文件</button>
+      <button>编辑</button>
+      <button>视图</button>
+      <button>帮助</button>
+   </ul>
+   <div class="tool">
+      <ul class="details">
+         <button></button>
+         <button></button>
+         <button id="eraser"></button>
+         <button></button>
+         <button></button>
+         <button></button>
+         <button id="pen"></button>
+         <button></button>
+         <button></button>
+         <button></button>
+         <button id="line"></button>
+         <button></button>
+         <button id="square"></button>
+         <button></button>
+         <button id="circle"></button>
+         <button></button>
+      </ul>
+      <ul class="lineRuler">
+         <button></button>
+         <button></button>
+         <button></button>
+         <button></button>
+         <button></button>
+      </ul>
+   </div>
+   <div class="container">
+      <canvas id="cavs" width="700px" height="400px"></canvas>
+   </div>
+   <div class="draw">
+      <div class="allColor">
+         <div class="curColor">
+            <div class="under">
+               <div></div>
+            </div>
+         </div>
+         <ul>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+         </ul>
+      </div>
+   </div>
+   <div class="etc"></div>
+   <div class="foot">
+      For Help, click Help Topics on the Help Menu.
+   </div>
+</body>
+<script>
+   var drawingBoard = {
+      cavs: document.getElementById('cavs'),
+      ctx: document.getElementById('cavs').getContext('2d'),
+      ul_node: document.getElementsByTagName('ul')[1],
+      colorBoard: document.getElementById('color'),
+      lineRuler: document.getElementById('lineRuler'),
+      imgArr: [],//存放图片
+      init: function () {
+         this.ctx.lineCap = 'round';
+         this.ctx.lineJoin = 'round';
+         this.btnsFnAll();
+      },
+      btnsFnAll: function () {
+         var self = this;
+         this.ul_node.addEventListener('click', function (e) {
+            console.log("111");
+            switch (e.target.id) {
+               case 'pen'://画画
+                  var pen = document.getElementById('pen');
+                  pen.style.backgroundColor = "rgb(240, 240, 240, 0.8)";
+                  pen.style.boxShadow = "1px 1px white, -1px -1px grey";
+                  self.ctx.strokeStyle = "black";
+                  self.ctx.lineWidth = 2;
+                  var left = self.cavs.offsetLeft;
+                  var top = self.cavs.offsetTop;
+                  self.cavs.onmousedown = function (e) {
+                     var e_x = e.pageX;//鼠标在画布上的x点
+                     var e_y = e.pageY;
+                     self.ctx.beginPath();//开始绘制
+                     self.ctx.moveTo(e_x - left, e_y - top);//落笔点，开始点
+                     var imgData = self.ctx.getImageData(0, 0, self.cavs.offsetWidth, self.cavs.offsetHeight);
+                     self.imgArr.push(imgData)
+                     document.onmousemove = function (e) {
+                        self.ctx.lineTo(e.pageX - left, e.pageY - top);//落笔点，开始点
+                        self.ctx.stroke();
+                     }
+                     document.onmouseup = function () {
+                        document.onmousemove = null;
+                        self.ctx.closePath();//闭合当前的路径 结束绘制
+                     }
+                  };
+                  var eraser = document.getElementById('eraser');
+                  eraser.style.backgroundColor = null;
+                  eraser.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var line = document.getElementById('line');
+                  line.style.backgroundColor = null;
+                  line.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var circle = document.getElementById('circle');
+                  circle.style.backgroundColor = null;
+                  circle.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var square = document.getElementById('square');
+                  square.style.backgroundColor = null;
+                  square.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  break;
+               case 'eraser'://橡皮
+                  var eraser = document.getElementById('eraser');
+                  eraser.style.backgroundColor = "rgb(240, 240, 240, 0.8)";
+                  eraser.style.boxShadow = "1px 1px white, -1px -1px grey";
+                  self.ctx.strokeStyle = "#ffffff";
+                  self.ctx.lineWidth = 5;
+                  var pen = document.getElementById('pen');
+                  pen.style.backgroundColor = null;
+                  pen.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var line = document.getElementById('line');
+                  line.style.backgroundColor = null;
+                  line.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var circle = document.getElementById('circle');
+                  circle.style.backgroundColor = null;
+                  circle.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var square = document.getElementById('square');
+                  square.style.backgroundColor = null;
+                  square.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  break;
+               case 'line'://直线
+                  var line = document.getElementById('line');
+                  line.style.backgroundColor = "rgb(240, 240, 240, 0.8)";
+                  line.style.boxShadow = "1px 1px white, -1px -1px grey";
+                  self.ctx.strokeStyle = "black";
+                  self.ctx.lineWidth = 2;
+                  var left = self.cavs.offsetLeft;
+                  var top = self.cavs.offsetTop;
+                  self.cavs.onmousedown = function (e) {
+                     var e_x = e.pageX;//鼠标在画布上的x点
+                     var e_y = e.pageY;
+                     self.ctx.beginPath();//开始绘制
+                     self.ctx.moveTo(e_x - left, e_y - top);//落笔点，开始点
+                     var imgData = self.ctx.getImageData(0, 0, self.cavs.offsetWidth, self.cavs.offsetHeight);
+                     self.imgArr.push(imgData)
+                     document.onmouseup = function (e) {
+                        self.ctx.lineTo(e.pageX - left, e.pageY - top);//落笔点，开始点
+                        self.ctx.stroke();
+                        self.ctx.closePath();//闭合当前的路径 结束绘制
+                     }
+                  };
+                  var pen = document.getElementById('pen');
+                  pen.style.backgroundColor = null;
+                  pen.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var eraser = document.getElementById('eraser');
+                  eraser.style.backgroundColor = null;
+                  eraser.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var circle = document.getElementById('circle');
+                  circle.style.backgroundColor = null;
+                  circle.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var square = document.getElementById('square');
+                  square.style.backgroundColor = null;
+                  square.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  break;
+               case 'circle'://圆
+                  var circle = document.getElementById('circle');
+                  circle.style.backgroundColor = "rgb(240, 240, 240, 0.8)";
+                  circle.style.boxShadow = "1px 1px white, -1px -1px grey";
+                  self.ctx.strokeStyle = "black";
+                  self.ctx.lineWidth = 2;
+                  var left = self.cavs.offsetLeft;
+                  var top = self.cavs.offsetTop;
+                  self.cavs.onmousedown = function (e) {
+                     var e_x = e.pageX;//鼠标在画布上的x点
+                     var e_y = e.pageY;
+                     self.ctx.beginPath();//开始绘制
+                     var imgData = self.ctx.getImageData(0, 0, self.cavs.offsetWidth, self.cavs.offsetHeight);
+                     self.imgArr.push(imgData)
+                     document.onmouseup = function (e) {
+                        self.ctx.arc(e.pageX - left, e.pageY - top, 50, 0, 2 * Math.PI);
+                        self.ctx.stroke();
+                        self.ctx.closePath();//闭合当前的路径 结束绘制
+                     }
+                  };
+                  var pen = document.getElementById('pen');
+                  pen.style.backgroundColor = null;
+                  pen.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var eraser = document.getElementById('eraser');
+                  eraser.style.backgroundColor = null;
+                  eraser.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var line = document.getElementById('line');
+                  line.style.backgroundColor = null;
+                  line.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var square = document.getElementById('square');
+                  square.style.backgroundColor = null;
+                  square.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  break;
+               case 'square'://矩形
+                  var square = document.getElementById('square');
+                  square.style.backgroundColor = "rgb(240, 240, 240, 0.8)";
+                  square.style.boxShadow = "1px 1px white, -1px -1px grey";
+                  self.ctx.strokeStyle = "black";
+                  self.ctx.lineWidth = 2;
+                  var left = self.cavs.offsetLeft;
+                  var top = self.cavs.offsetTop;
+                  self.cavs.onmousedown = function (e) {
+                     var e_x = e.pageX;//鼠标在画布上的x点
+                     var e_y = e.pageY;
+                     self.ctx.beginPath();//开始绘制
+                     var imgData = self.ctx.getImageData(0, 0, self.cavs.offsetWidth, self.cavs.offsetHeight);
+                     self.imgArr.push(imgData)
+                     document.onmouseup = function (en) {
+                        self.ctx.rect(e.pageX - left, e.pageY - top, en.pageX - e.pageX, en.pageY - e.pageY);
+                        self.ctx.stroke();
+                        self.ctx.closePath();//闭合当前的路径 结束绘制
+                     }
+                  };
+                  var pen = document.getElementById('pen');
+                  pen.style.backgroundColor = null;
+                  pen.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var eraser = document.getElementById('eraser');
+                  eraser.style.backgroundColor = null;
+                  eraser.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var line = document.getElementById('line');
+                  line.style.backgroundColor = null;
+                  line.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  var circle = document.getElementById('circle');
+                  circle.style.backgroundColor = null;
+                  circle.style.boxShadow = "-1px -1px rgba(255, 255, 255, 0.8), 1px 1px #333";
+                  break;
+               case 'save'://保存
+                  let url = self.cavs.toDataURL('image/jpg');
+                  let a = document.createElement('a');
+                  document.body.appendChild(a);
+                  a.href = url;
+                  a.download = '草稿纸';
+                  a.target = '_blank';
+                  a.click()
+                  break;
+               case 'rescind'://撤销
+                  console.log(self.imgArr)
+                  if (self.imgArr.length > 0) {
+                     self.ctx.putImageData(self.imgArr.pop(), 0, 0)
+                  }
+                  break;
+               case 'cleanBoard'://清屏
+                  self.ctx.clearRect(0, 0, self.cavs.offsetWidth, self.cavs.offsetHeight);
+                  break;
+            }
+         });
+      }
+   };
+   drawingBoard.init();
+</script>
+
+</html>
